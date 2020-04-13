@@ -1987,8 +1987,10 @@ esac
 # ICC needs -fp-model strict or floats behave badly
 case "$CC" in
 *icc*)
-    CFLAGS_NODIST="$CFLAGS_NODIST -fp-model strict"
-    ;;
+	if [[ ! $CFLAGS_NODIST =~ "-mieee-fp" ]]; then 
+    		CFLAGS_NODIST="$CFLAGS_NODIST -fp-model strict"
+    		;;
+	fi
 esac
 
 if test "$assertions" = 'true'; then
